@@ -1,0 +1,20 @@
+{
+  "name": "language-yaml-gotpl",
+  "version": "0.1.0",
+  "engines": {
+    "atom": "*",
+    "node": "*"
+  },
+  "description": "",
+  "homepage": "BLANK",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/stannum-l/language-yaml-gotpl"
+  },
+  "license": "MIT",
+  "dependencies": {
+  },
+  "devDependencies": {
+    "coffeelint": "^1.10.1"
+  }
+}
