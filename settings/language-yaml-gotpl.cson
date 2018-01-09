@@ -1,0 +1,4 @@
+'.source.yaml.tpl':
+  'editor':
+    'autoIndentOnPaste': false
+    'tabType': 'soft'
