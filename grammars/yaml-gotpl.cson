@@ -1,0 +1,137 @@
+'scopeName': 'text.yaml-gotpl'
+'name': 'YAML-based Go Template'
+'fileTypes': [
+  '.yaml.tpl'
+  '.yml.tpl'
+]
+'patterns': [
+  {
+    'include': '#erb'
+  }
+  {
+    'include': '#comment'
+  }
+  {
+    'match': '\\t+'
+    'name': 'invalid.illegal.whitespace.yaml'
+  }
+  {
+    'match': '^---'
+    'name': 'punctuation.definition.directives.end.yaml'
+  }
+  {
+    'match': '^\\.\\.\\.'
+    'name': 'punctuation.definition.document.end.yaml'
+  }
+  {
+    'include': '#variables'
+  }
+  {
+    'include': '#strings'
+  }
+]
+'repository':
+  'comment':
+    'patterns': [
+      {
+        'begin': '#'
+        'beginCaptures': 'punctuation.definition.comment.yaml-gotpl'
+        'end': '$\\n?'
+        'name': 'comment.line.number-sign.yaml-gotpl'
+      }
+    ]
+  'numeric':
+    'match': '(((0(x|X)[0-9a-fA-F]*)|(([0-9]+\\.?[0-9]*)|(\\.[0-9]+))((e|E)(\\+|-)?[0-9]+)?)(L|l|UL|ul|u|U|F|f)?)\\s*($|(?=#)(?!#{))'
+    'captures':
+      '1':
+        'name': 'constant.numeric.yaml'
+  'strings':
+    'patterns': [
+      {
+        'begin': '"'
+        'beginCaptures':
+          '0':
+            'name': 'punctuation.definition.string.begin.yaml'
+        'end': '"'
+        'endCaptures':
+          '0':
+            'name': 'punctuation.definition.string.end.yaml'
+        'name': 'string.quoted.double.yaml'
+        'patterns': [
+          {
+            'include': '#escape_char'
+          }
+          {
+            'include': '#erb'
+          }
+        ]
+      }
+      {
+        'begin': "'"
+        'beginCaptures':
+          '0':
+            'name': 'punctuation.definition.string.begin.yaml'
+        'end': "'"
+        'endCaptures':
+          '0':
+            'name': 'punctuation.definition.string.end.yaml'
+        'name': 'string.quoted.single.yaml'
+        'patterns': [
+          {
+            'match': "''"
+            'name': 'constant.character.escape.yaml'
+          }
+          {
+            'include': '#erb'
+          }
+        ]
+      }
+      {
+        'begin': '`'
+        'beginCaptures':
+          '0':
+            'name': 'punctuation.definition.string.begin.yaml'
+        'end': '`'
+        'endCaptures':
+          '0':
+            'name': 'punctuation.definition.string.end.yaml'
+        'name': 'string.interpolated.yaml'
+        'patterns': [
+          {
+            'include': '#escape_char'
+          }
+          {
+            'include': '#erb'
+          }
+        ]
+      }
+      {
+        'match': '[^\\s"\'\\n](?!\\s*#(?!{))([^#\\n]|((?<!\\s)#))*'
+        'name': 'string.quoted.double.yaml'
+      }
+    ]
+  'scalar-content':
+    'patterns': [
+      {
+        'include': '#nocomment'
+      }
+      {
+        'include': '#constants'
+      }
+      {
+        'include': '#numeric'
+      }
+      {
+        'include': '#strings'
+      }
+      {
+        'match': '!(?=\\s)'
+        'name': 'punctuation.definition.tag.non-specific.yaml'
+      }
+    ]
+  'variables':
+    'captures':
+      '1':
+        'name': 'punctuation.definition.variable.yaml'
+    'match': '(&|\\*)\\w+$'
+    'name': 'variable.other.yaml'
