@@ -1,8 +1,7 @@
 'scopeName': 'source.yaml.gotpl'
 'name': 'YAML (Go Template)'
 'fileTypes': [
-    'yaml.tpl',
-    'yml.tpl'
+    'tpl'
 ]
 'patterns': [
     {
